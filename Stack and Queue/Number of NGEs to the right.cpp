@@ -40,3 +40,27 @@ Output
 Time Complexity: O(NQ), and O(N) to answer a single query
 Auxiliary space: O(1) 
 */
+
+
+
+class Solution{
+public:
+
+    vector<int> count_NGE(int n, vector<int> &arr, int queries, vector<int> &indices){
+        //write your code here
+    
+     vector<int>v;
+     for(int i=0;i<queries;i++){
+         int count=0;
+       for (int j = indices[i]+1; j < n; j++)
+          if (arr[j] > arr[indices[i]]){
+            count++;
+          }
+         v.push_back(count);
+       
+     }
+     return v;
+    
+    }
+
+};
