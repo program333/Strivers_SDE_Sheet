@@ -1,5 +1,7 @@
 https://www.geeksforgeeks.org/write-a-function-to-get-the-intersection-point-of-two-linked-lists/
 
+https://takeuforward.org/data-structure/find-intersection-of-two-linked-lists/
+
 // CPP program to print intersection of lists
 #include <bits/stdc++.h>
 using namespace std;
