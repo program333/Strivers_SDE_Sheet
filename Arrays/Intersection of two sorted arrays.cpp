@@ -67,3 +67,59 @@ the worst case O(n1+n2) where n1 = A.size() and n2 = B.size() }.
 
 Space Complexity: O(1) { There is no extra space used in the two-pointers approach }.
 */
+
+
+//Handling duplicate in Arrays 
+https://www.geeksforgeeks.org/union-and-intersection-of-two-sorted-arrays-2/?ref=rp
+
+// C++ program to find intersection of two sorted arrays
+#include <bits/stdc++.h>
+using namespace std;
+
+/* Function prints Intersection of arr1[] and arr2[]
+m is the number of elements in arr1[]
+n is the number of elements in arr2[] */
+void print_intersection(int arr1[], int arr2[], int m, int n)
+{
+	int i = 0, j = 0;
+	set<int> s; //set for handling duplicate elements in intersection list
+	while (i < m && j < n) {
+		if (arr1[i] < arr2[j])
+			i++;
+		else if (arr2[j] < arr1[i])
+			j++;
+		else /* if arr1[i] == arr2[j] */
+		{
+			s.insert(arr2[j]); //insertion in set s
+			i++;
+			j++;
+		}
+	}
+	for(auto itr: s) //printing intersection set list
+	{
+		cout<<itr<<" ";
+		}
+		
+}
+
+/* Driver code */
+int main()
+{
+	int arr1[] = { 1, 2, 2, 3, 4 };
+	int arr2[] = { 2, 2, 4, 6, 7, 8 };
+
+	int m = sizeof(arr1) / sizeof(arr1[0]);
+	int n = sizeof(arr2) / sizeof(arr2[0]);
+
+	// Function calling
+	print_intersection(arr1, arr2, m, n);
+
+	return 0;
+}
+
+/*
+Output
+2 4 
+Time Complexity : O(m + n) 
+Auxiliary Space : O(min(m, n))
+*/
