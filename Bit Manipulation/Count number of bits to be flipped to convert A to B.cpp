@@ -36,4 +36,11 @@ int main()
 	return 0;
 }
 
+/*
+Output
+4
+Time Complexity: O(K) where K is the number of bits
+Auxiliary Space: O(1)
 
+Note: Set bits in (a XOR b) can also be computer using built in function __builtin_popcount() in C/C++
+*/
