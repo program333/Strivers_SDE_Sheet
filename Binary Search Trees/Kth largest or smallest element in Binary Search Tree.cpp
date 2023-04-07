@@ -1,6 +1,27 @@
 https://takeuforward.org/data-structure/kth-largest-smallest-element-in-binary-search-tree/
 https://www.geeksforgeeks.org/find-k-th-smallest-element-in-bst-order-statistics-in-bst/
+https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/
 
+
+class Solution {
+public:
+    int kthSmallest(TreeNode* root, int k) {
+        stack<TreeNode *> stk;
+        while(1)
+        {
+            while(root!=NULL)
+            {
+                stk.push(root);
+                root=root->left;
+            }
+            root=stk.top();
+            stk.pop();
+            k--;
+            if(k==0) return root->val;
+            root=root->right;
+        }
+    }
+};
 #include<bits/stdc++.h>
 using namespace std;
 struct node{
