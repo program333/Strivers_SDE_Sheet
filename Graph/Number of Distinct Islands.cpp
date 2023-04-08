@@ -1,5 +1,5 @@
 https://takeuforward.org/data-structure/number-of-distinct-islands/
-
+https://www.geeksforgeeks.org/find-the-number-of-distinct-islands-in-a-2d-matrix/
 
 #include<bits/stdc++.h>
 
