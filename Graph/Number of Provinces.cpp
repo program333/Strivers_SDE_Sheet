@@ -1,4 +1,4 @@
-
+https://takeuforward.org/data-structure/number-of-provinces/
 
 #include <bits/stdc++.h>
 using namespace std;
