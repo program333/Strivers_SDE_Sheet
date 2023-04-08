@@ -1,4 +1,5 @@
 https://takeuforward.org/data-structure/last-occurrence-in-a-sorted-array/
+https://www.geeksforgeeks.org/find-first-and-last-positions-of-an-element-in-a-sorted-array/
 
 
 #include<bits/stdc++.h>
