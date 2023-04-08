@@ -1,4 +1,5 @@
 https://www.geeksforgeeks.org/k-th-missing-element-in-sorted-array/
+https://leetcode.com/problems/kth-missing-positive-number/description/
 
 // CPP program for above approach
 #include <bits/stdc++.h>
