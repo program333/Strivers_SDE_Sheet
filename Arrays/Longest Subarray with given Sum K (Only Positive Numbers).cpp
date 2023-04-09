@@ -1,4 +1,5 @@
-https://takeuforward.org/data-structure/longest-subarray-with-given-sum-k/
+https://takeuforward.org/data-structure/longest-subarray-with-given-sum-k
+https://www.geeksforgeeks.org/find-subarray-with-given-sum/
 /*
 Example 1:
 Input:
