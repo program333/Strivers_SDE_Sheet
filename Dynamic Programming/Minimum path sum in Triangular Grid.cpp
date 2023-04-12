@@ -1,4 +1,5 @@
 https://takeuforward.org/data-structure/minimum-path-sum-in-triangular-grid-dp-11/
+https://www.geeksforgeeks.org/minimum-sum-path-triangle/
 
 #include <bits/stdc++.h>
 
