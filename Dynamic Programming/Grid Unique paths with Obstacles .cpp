@@ -1,4 +1,5 @@
 https://takeuforward.org/data-structure/grid-unique-paths-2-dp-9/
+https://www.geeksforgeeks.org/unique-paths-in-a-grid-with-obstacles/
 
 
 #include <bits/stdc++.h>
