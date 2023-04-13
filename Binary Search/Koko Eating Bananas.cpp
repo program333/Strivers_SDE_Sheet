@@ -1,4 +1,5 @@
 https://www.geeksforgeeks.org/koko-eating-bananas/
+https://leetcode.com/problems/koko-eating-bananas/description/
 
 // C++ implementation for the above approach
 
