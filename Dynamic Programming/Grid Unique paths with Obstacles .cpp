@@ -8,7 +8,7 @@ using namespace std;
 
 int mazeObstaclesUtil(int i, int j, vector<vector<int> > &maze, vector<vector<int> > 
 &dp) {
-  if(i>0 && j>0 && maze[i][j]==-1) return 0; 
+  if(i>=0 && j>=0 && maze[i][j]==-1) return 0; 
   if(i==0 && j == 0)
     return 1;
   if(i<0 || j<0)
