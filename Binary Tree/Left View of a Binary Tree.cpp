@@ -1,6 +1,83 @@
 https://www.geeksforgeeks.org/print-left-view-binary-tree/
 https://takeuforward.org/data-structure/right-left-view-of-binary-tree/
 
+
+/*
+
+Given the root of a binary tree, return the left view of its nodes' values. Assume the left and right child of a node makes a 45–degree angle with the parent.
+
+Input:
+		   1
+		 /	 \
+		/	  \
+	   2	   3
+	  		 /   \
+	 	  	/	  \
+		   5	   6
+		 /   \
+		/	  \
+	   7	   8
+
+Output: [1, 2, 5, 7]
+
+Input:
+
+	  1
+	/   \
+   /	 \
+  2		  3
+   \	 /
+	\   /
+	 4 5
+
+Output: [1, 2, 4]
+
+*/
+
+class Solution
+{
+public:
+
+	/*
+		A binary tree node is defined as:
+
+		class Node
+		{
+		public:
+			int data;									// data field
+			Node* left = nullptr, *right = nullptr;		// pointer to the left and right child
+
+			Node() {}
+			Node(int data): data(data) {}
+			Node(int data, Node *left, Node *right): data(data), left(left), right(right) {}
+		};
+	*/
+
+	vector<int> findLeftView(Node* root)
+	{
+		// Write your code here...
+		vector<int>ans;
+		if(root == NULL) return ans;
+		map<int,int>mp; // level, val
+		queue<pair<Node*, int>>Q; // node, level
+		Q.push({root, 0});
+		
+		while(!Q.empty()){
+			Node* node = Q.front().first;
+			int level = Q.front().second;
+			Q.pop();
+			
+			if(mp.find(level) == mp.end()) mp[level] = node->data;
+			if(node->left != NULL) Q.push({node->left, level+1});
+			if(node->right != NULL) Q.push({node->right, level+1});
+		}
+		for(auto x:mp){
+			ans.push_back(x.second);
+		}
+		return ans;
+	}
+};
+
 // C++ program to print left view of Binary Tree
 #include <bits/stdc++.h>
 using namespace std;
