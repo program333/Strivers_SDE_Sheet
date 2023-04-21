@@ -2,6 +2,45 @@ https://www.geeksforgeeks.org/print-right-view-binary-tree-2/
 https://takeuforward.org/data-structure/right-left-view-of-binary-tree/
 
 
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    vector<int> rightSideView(TreeNode* root) {
+        vector<int>ans;
+        if(root == NULL) return ans;
+        
+        map<int,int>mp; // level, val
+        queue<pair<TreeNode*, int>>Q; // node, level
+        Q.push({root, 0});
+        
+        while(!Q.empty()){
+            auto it = Q.front();
+            Q.pop();
+            TreeNode* node = it.first;
+            int level = it.second;
+            
+            if(mp.find(level) == mp.end()) mp[level] = node->val;
+            if(node->right != NULL) Q.push({node->right, level+1});
+            if(node->left != NULL) Q.push({node->left, level+1});
+        }
+        for(auto x:mp){
+            ans.push_back(x.second);
+        }
+        return ans;
+    }
+};
+
+
 /*
 Follow the steps below to solve the problem:
 
