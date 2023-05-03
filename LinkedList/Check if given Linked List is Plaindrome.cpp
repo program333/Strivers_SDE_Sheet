@@ -1,5 +1,35 @@
 https://takeuforward.org/data-structure/starting-point-of-loop-in-a-linked-list/
 
+class Solution{
+  public:
+    //Function to check whether the list is palindrome.
+    bool isPalindrome(Node *head)
+    {
+        //Your code here
+        stack<int>s;
+        Node* temp=head;
+       
+        while(temp != NULL){
+            s.push(temp->data);
+            temp=temp->next;
+        }
+        temp=head;
+       while(!s.empty()){
+           int i=s.top();
+           s.pop();
+           if(temp->data != i){
+               return false;
+           }
+           temp=temp->next;
+           
+       }
+       
+       return true;
+    }
+};
+
+
+
 #include<bits/stdc++.h>
 using namespace std;
 
