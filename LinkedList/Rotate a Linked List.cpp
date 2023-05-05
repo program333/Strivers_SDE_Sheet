@@ -1,85 +1,105 @@
 https://www.geeksforgeeks.org/rotate-a-linked-list/
 
+// C++ program to rotate
+// a linked list counter clock wise
+
 #include <bits/stdc++.h>
 using namespace std;
 
+/* Link list node */
 class Node {
 public:
 	int data;
 	Node* next;
 };
 
-// Function to rotate a linked list.
-Node* rotate(Node* head, int k)
+// This function rotates a linked list
+// counter-clockwise and updates the
+// head. The function assumes that k is
+// smaller than size of linked list.
+// It doesn't modify the list if
+// k is greater than or equal to size
+void rotate(Node** head_ref, int k)
 {
-	// let us consider the example
-	// 10->20->30->40->50->60 - k=4
-	// initialising 2 nodes temp and last
-	Node* last = head;
-	Node* temp = head;
+	if (k == 0)
+		return;
 
-	// if head is null or k==0 no rotation is required
-	if (head == NULL || k == 0) {
-		return head;
+	// Let us understand the below
+	// code for example k = 4 and
+	// list = 10->20->30->40->50->60.
+	Node* current = *head_ref;
+
+	// current will either point to
+	// kth or NULL after this loop.
+	// current will point to node
+	// 40 in the above example
+	int count = 1;
+	while (count < k && current != NULL) {
+		current = current->next;
+		count++;
 	}
 
-	// Making last point to the last-node of the given
-	// linked list in this case 60
-	while (last->next != NULL) {
-		last = last->next;
-	}
+	// If current is NULL, k is greater than
+	// or equal to count of nodes in linked list.
+	// Don't change the list in this case
+	if (current == NULL)
+		return;
 
-	// Rotating the linked list k times, one rotation at a
-	// time.
-	while (k) {
+	// current points to kth node.
+	// Store it in a variable. kthNode
+	// points to node 40 in the above example
+	Node* kthNode = current;
 
-		// Make head point to next of head
-		// so in the example given above head becomes 20
-		head = head->next;
+	// current will point to
+	// last node after this loop
+	// current will point to
+	// node 60 in the above example
+	while (current->next != NULL)
+		current = current->next;
 
-		// Making next of temp as NULL
-		// In the above example :10->NULL
-		temp->next = NULL;
+	// Change next of last node to previous head
+	// Next of 60 is now changed to node 10
+	current->next = *head_ref;
 
-		// Making temp as last node
-		// (head)20->30->40->50->60->10(last)
-		last->next = temp;
-		last = temp;
+	// Change head to (k+1)th node
+	// head is now changed to node 50
+	*head_ref = kthNode->next;
 
-		// Point temp to head again for next rotation
-		temp = head;
-		k--;
-	}
-
-	return head;
+	// change next of kth node to NULL
+	// next of 40 is now NULL
+	kthNode->next = NULL;
 }
 
-void printList(Node* n)
-{
-	while (n != NULL) {
-		cout << n->data << " ";
-		n = n->next;
-	}
-	cout << endl;
-}
-
+/* UTILITY FUNCTIONS */
+/* Function to push a node */
 void push(Node** head_ref, int new_data)
 {
-	// allocate node
+	/* allocate node */
 	Node* new_node = new Node();
 
-	// put in the data
+	/* put in the data */
 	new_node->data = new_data;
 
-	// link the old list of the new node
+	/* link the old list of the new node */
 	new_node->next = (*head_ref);
 
-	// move the head to point to the new node
+	/* move the head to point to the new node */
 	(*head_ref) = new_node;
 }
 
-int main()
+/* Function to print linked list */
+void printList(Node* node)
 {
+	while (node != NULL) {
+		cout << node->data << " ";
+		node = node->next;
+	}
+}
+
+/* Driver code*/
+int main(void)
+{
+	/* Start with the empty list */
 	Node* head = NULL;
 
 	// create a list 10->20->30->40->50->60
@@ -88,12 +108,15 @@ int main()
 
 	cout << "Given linked list \n";
 	printList(head);
-	head = rotate(head, 4);
+	rotate(&head, 4);
 
 	cout << "\nRotated Linked list \n";
 	printList(head);
-	return 1;
+
+	return (0);
 }
+
+
 
 /*
 Output
