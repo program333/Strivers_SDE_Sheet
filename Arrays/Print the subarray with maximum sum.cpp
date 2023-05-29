@@ -10,71 +10,50 @@ To find the start index, iterate from endIndex in the left direction and keep de
 Now print the subarray between [start, end].
 */
 
-// C++ program for the above approach
+
+
 #include <bits/stdc++.h>
 using namespace std;
 
-// Function to print the elements
-// of Subarray with maximum sum
-void SubarrayWithMaxSum(vector<int>& nums)
-{
-	// Initialize currMax and globalMax
-	// with first value of nums
-	int endIndex, currMax = nums[0];
-	int globalMax = nums[0];
+void maxSubArray(vector<int>& nums) {
+       int max_sum=INT_MIN;
+       int curr_sum=0;
+       int start=0,end=0,s=0;
+       int n=nums.size();
+       for(int i=0;i<n;i++){
+            curr_sum+=nums[i];
 
-	// Iterate for all the elements
-	// of the array
-	for (int i = 1; i < nums.size(); ++i) {
+            if(curr_sum>max_sum){
+                max_sum = curr_sum;
+                start = s;
+                end = i;
+            }
 
-		// Update currMax
-		currMax = max(nums[i],
-					nums[i] + currMax);
-
-		// Check if currMax is greater
-		// than globalMax
-		if (currMax > globalMax) {
-			globalMax = currMax;
-			endIndex = i;
-		}
-	}
-
-	int startIndex = endIndex;
-
-	// Traverse in left direction to
-	// find start Index of subarray
-	while (startIndex >= 0) {
-
-		globalMax -= nums[startIndex];
-
-		if (globalMax == 0)
-			break;
-
-		// Decrement the start index
-		startIndex--;
-	}
-
-	// Printing the elements of
-	// subarray with max sum
-	for (int i = startIndex;
-		i <= endIndex; ++i) {
-
-		cout << nums[i] << " ";
-	}
-}
+            if(curr_sum<0){
+                curr_sum=0;
+                s = i+1;
+            }
+       }
+       
+       for(int i=start;i<=end;i++){
+           cout<<nums[i]<<" ";
+       }
+       
+    }
 
 // Driver Code
 int main()
 {
 	// Given array arr[]
 	vector<int> arr
-		= { -2, -5, 6, -2,
-			-3, 1, 5, -6 };
+		= { -2, -3, 4, -1, -2, 1, 5, -3 };
 
 	// Function call
-	SubarrayWithMaxSum(arr);
+	maxSubArray(arr);
 	return 0;
 }
+
+	
 
 /*
 Output
