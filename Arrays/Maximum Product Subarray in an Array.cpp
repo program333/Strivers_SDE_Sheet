@@ -1,5 +1,28 @@
 https://takeuforward.org/data-structure/maximum-product-subarray-in-an-array/
 
+https://leetcode.com/problems/maximum-product-subarray/
+
+class Solution {
+public:
+    int maxProduct(vector<int>& arr) {
+        int maxProd=arr[0];
+	    int minval=arr[0],maxval=arr[0];
+        int n=arr.size();
+	    
+	    for(int i=1;i<n;i++){
+	        if(arr[i]<0){
+	            swap(minval,maxval);
+	        }
+	        
+	        minval=min(arr[i],arr[i]*minval);
+	        maxval=max(arr[i],arr[i]*maxval);
+	        
+	        maxProd = max(maxProd,maxval);
+	    }
+	    
+	    return maxProd;
+    }
+};
 
 
 #include<bits/stdc++.h>
