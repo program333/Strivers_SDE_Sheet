@@ -1,5 +1,34 @@
 https://www.geeksforgeeks.org/find-rotation-count-rotated-sorted-array/
 
+class Solution{
+public:	
+	int findKRotation(int arr[], int n) {
+	    // code here
+	   int low = 0, high = n-1;
+
+       if(arr[low] <= arr[high]) return 0;
+       
+       while(low<=high){
+            int mid = low + (high-low)/2;
+            
+            if(arr[mid] > arr[mid+1]){
+                return mid+1;
+            }
+            else if(arr[mid] < arr[mid-1]){
+                return mid;
+            }
+            else if(arr[low]<=arr[mid]){
+                low = mid+1;
+            }
+            else if(arr[mid]<=arr[high]){
+                high = mid-1;
+            }
+       }
+        return 0;
+	}
+
+};
+
 // Binary Search based C++ program to find number
 // of rotations in a sorted and rotated array.
 #include <bits/stdc++.h>
