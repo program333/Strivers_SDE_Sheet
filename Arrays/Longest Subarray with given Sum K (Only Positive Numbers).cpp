@@ -50,41 +50,44 @@ Space Complexity: O(1), we are not using any extra space
 */
 
 
-#include<bits/stdc++.h>
 
+
+
+#include <bits/stdc++.h>
 using namespace std;
 
-int longestSubArrWithSumK_Optimal(int arr[], int n, int k) {
-  int start = 0, end = -1, sum = 0, maxLength = 0;
-  while (start < n) {
-    while ((end + 1 < n) && (sum + arr[end + 1] <= k))
-      sum += arr[++end];
+int getLongestSubarray(vector<int>& a, long long k) {
+    int n = a.size(); // size of the array.
 
-    if (sum == k)
-      maxLength = max(maxLength, (end - start + 1));
+    int left = 0, right = 0; // 2 pointers
+    long long sum = a[0];
+    int maxLen = 0;
+    while (right < n) {
+        // if sum > k, reduce the subarray from left
+        // until sum becomes less or equal to k:
+        while (left <= right && sum > k) {
+            sum -= a[left];
+            left++;
+        }
 
-    sum -= arr[start];
-    start++;
-  }
-  return maxLength;
+        // if sum = k, update the maxLen i.e. answer:
+        if (sum == k) {
+            maxLen = max(maxLen, right - left + 1);
+        }
+
+        // Move forward thw right pointer:
+        right++;
+        if (right < n) sum += a[right];
+    }
+
+    return maxLen;
 }
 
-int main() {
-
-  int arr[] = {7,1,6,0};
-  int n = sizeof(arr) / sizeof(arr[0]), k = 7;
-
-  cout << "Length of the longest subarray with sum K is " << 
-  longestSubArrWithSumK_Optimal(arr, n, k);
-
-  return 0;
+int main()
+{
+    vector<int> a = {2, 3, 5, 1, 9};
+    long long k = 10;
+    int len = getLongestSubarray(a, k);
+    cout << "The length of the longest subarray is: " << len << "\n";
+    return 0;
 }
-
-/*
-output: Length of the longest subarray with sum K is 3
-
-Time Complexity: O(2n) ~ O(n), if we observe closely, the window only forwards to the right always. 
-And every element is visited at most 2 times, one by the end variable and by the start variable.
-
-Space Complexity: O(1), we are not using any extra space.
-*/
