@@ -12,6 +12,48 @@ To keep the ordering of all nodes same, we must insert all the odd nodes at the 
 we must keep track of last pointer in the even node list.
 */
 
+https://leetcode.com/problems/odd-even-linked-list/
+class Solution {
+public:
+    ListNode* oddEvenList(ListNode* head) {
+       vector<ListNode*>odd;
+        vector<ListNode*>even;
+        ListNode* temp=head;
+        int i=1;
+        while(temp){
+            if(i%2!=0){
+                odd.push_back(temp);
+            }else{
+                even.push_back(temp);
+            }
+            temp=temp->next;
+            i++;
+        }
+
+        ListNode* dummy=new ListNode(0);
+        ListNode* current = dummy;
+        int l1=odd.size();
+        for(int i=0;i<l1;i++){
+             current->next = odd[i];
+             current = current->next;
+        }
+
+       int l2 = even.size();
+      for (int i = 0; i < l2; i++) {
+          current->next = even[i];
+          current = current->next;
+       }
+
+       current->next = nullptr;  // Set the next pointer of the last node to nullptr
+
+       return dummy->next;
+    }
+};
+
+
+
+
+
 // CPP program to segregate even and odd nodes in a
 // Linked List
 #include <bits/stdc++.h>
