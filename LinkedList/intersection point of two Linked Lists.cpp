@@ -2,6 +2,20 @@ https://www.geeksforgeeks.org/write-a-function-to-get-the-intersection-point-of-
 
 https://takeuforward.org/data-structure/find-intersection-of-two-linked-lists/
 
+class Solution {
+public:
+   ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+    ListNode *ptrA = headA, *ptrB = headB;
+    while (ptrA != ptrB) { 
+        ptrA = ptrA ? ptrA->next : headB;
+        ptrB = ptrB ? ptrB->next : headA;
+    }
+    return ptrA;
+}
+};
+
+
+
 // CPP program to print intersection of lists
 #include <bits/stdc++.h>
 using namespace std;
