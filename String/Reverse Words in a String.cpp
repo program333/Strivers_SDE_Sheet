@@ -1,4 +1,36 @@
 https://takeuforward.org/data-structure/reverse-words-in-a-string/
+https://leetcode.com/problems/reverse-words-in-a-string/description/
+
+class Solution {
+public:
+    string reverseWords(string s) {
+        string ans="";
+         stack<string>st;
+        int n=s.length();
+        for(int i=0;i<n;i++){
+            if(s[i] !=' '){
+                while(i<n && s[i]!=' '){
+                     ans+=s[i];i++;
+                }
+                st.push(ans);
+                 ans="";
+                
+            }
+           
+        }
+        string res="";
+        while(!st.empty()){
+            res+=st.top();
+            st.pop();
+            if(!st.empty())
+                res+=" ";
+                        
+        } 
+        return res;
+    }
+};
+
+
 
 #include<bits/stdc++.h>
 using namespace std;
