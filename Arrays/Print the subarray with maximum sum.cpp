@@ -57,7 +57,7 @@ int main()
 
 /*
 Output
-6 -2 -3 1 5 
+4,-1, -2, 1, 5
 Time complexity: O(N) 
 Auxiliary Space: O(1)
 */
