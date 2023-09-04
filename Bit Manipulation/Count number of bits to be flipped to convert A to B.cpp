@@ -6,14 +6,17 @@ https://www.geeksforgeeks.org/count-number-of-bits-to-be-flipped-to-convert-a-to
 using namespace std;
 
 // Function that count set bits
-int countSetBits(int n)
+int countSetBits(int Xor)
 {
-	int count = 0;
-	while (n > 0) {
-		count++;
-		n &= (n - 1);
-	}
-	return count;
+        int count=0;
+        while(Xor){
+           if(Xor & 1){
+               count++;
+           }
+           Xor=Xor>>1;
+        }
+        
+        return count;
 }
 
 // Function that return count of
