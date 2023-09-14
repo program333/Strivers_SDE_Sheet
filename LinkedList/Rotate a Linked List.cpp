@@ -1,130 +1,75 @@
-https://www.geeksforgeeks.org/rotate-a-linked-list/
+//Rotate a Linked List by left k positions
 
-// C++ program to rotate
-// a linked list counter clock wise
+class Solution
+{
+    public:
+    //Function to rotate a linked list.
+    Node* rotate(Node* head, int k)
+    {
+    if (!head || k == 0) {
+        return head;
+    }
 
-#include <bits/stdc++.h>
-using namespace std;
+    // Calculate the length of the linked list
+    int length = 1;
+    Node* tail = head;
+    while (tail->next) {
+        tail = tail->next;
+        length++;
+    }
 
-/* Link list node */
-class Node {
-public:
-	int data;
-	Node* next;
+    // Calculate the actual rotation position (k % length)
+    k = k % length;
+
+    if (k == 0) {
+        return head; // No rotation needed
+    }
+
+    // Find the (k-1)th and kth nodes
+    Node* kthNode = head;
+    Node* prevKthNode = nullptr;
+    for (int i = 0; i < k; i++) {
+        prevKthNode = kthNode;
+        kthNode = kthNode->next;
+    }
+
+    // Update pointers to perform rotation
+    prevKthNode->next = nullptr;
+    tail->next = head;
+    head = kthNode;
+
+    return head;
+    }
 };
 
-// This function rotates a linked list
-// counter-clockwise and updates the
-// head. The function assumes that k is
-// smaller than size of linked list.
-// It doesn't modify the list if
-// k is greater than or equal to size
-void rotate(Node** head_ref, int k)
-{
-	if (k == 0)
-		return;
-
-	// Let us understand the below
-	// code for example k = 4 and
-	// list = 10->20->30->40->50->60.
-	Node* current = *head_ref;
-
-	// current will either point to
-	// kth or NULL after this loop.
-	// current will point to node
-	// 40 in the above example
-	int count = 1;
-	while (count < k && current != NULL) {
-		current = current->next;
-		count++;
-	}
-
-	// If current is NULL, k is greater than
-	// or equal to count of nodes in linked list.
-	// Don't change the list in this case
-	if (current == NULL)
-		return;
-
-	// current points to kth node.
-	// Store it in a variable. kthNode
-	// points to node 40 in the above example
-	Node* kthNode = current;
-
-	// current will point to
-	// last node after this loop
-	// current will point to
-	// node 60 in the above example
-	while (current->next != NULL)
-		current = current->next;
-
-	// Change next of last node to previous head
-	// Next of 60 is now changed to node 10
-	current->next = *head_ref;
-
-	// Change head to (k+1)th node
-	// head is now changed to node 50
-	*head_ref = kthNode->next;
-
-	// change next of kth node to NULL
-	// next of 40 is now NULL
-	kthNode->next = NULL;
-}
-
-/* UTILITY FUNCTIONS */
-/* Function to push a node */
-void push(Node** head_ref, int new_data)
-{
-	/* allocate node */
-	Node* new_node = new Node();
-
-	/* put in the data */
-	new_node->data = new_data;
-
-	/* link the old list of the new node */
-	new_node->next = (*head_ref);
-
-	/* move the head to point to the new node */
-	(*head_ref) = new_node;
-}
-
-/* Function to print linked list */
-void printList(Node* node)
-{
-	while (node != NULL) {
-		cout << node->data << " ";
-		node = node->next;
-	}
-}
-
-/* Driver code*/
-int main(void)
-{
-	/* Start with the empty list */
-	Node* head = NULL;
-
-	// create a list 10->20->30->40->50->60
-	for (int i = 60; i > 0; i -= 10)
-		push(&head, i);
-
-	cout << "Given linked list \n";
-	printList(head);
-	rotate(&head, 4);
-
-	cout << "\nRotated Linked list \n";
-	printList(head);
-
-	return (0);
-}
 
 
 
-/*
-Output
-Given linked list 
-10 20 30 40 50 60 
+//Rotate a Linked List by right k positions
 
-Rotated Linked list 
-50 60 10 20 30 40 
-Time Complexity: O(N)
-Auxiliary Space: O(1)
-*/
+
+class Solution {
+public:
+    ListNode* rotateRight(ListNode* head, int k) {
+        if(!head) return head;
+        
+        int len=1; // number of nodes
+        ListNode *newH, *tail;
+        newH=tail=head;
+        
+        while(tail->next)  // get the number of nodes in the list
+        {
+            tail = tail->next;
+            len++;
+        }
+        tail->next = head; // circle the link
+
+        if(k %= len) 
+        {
+            for(auto i=0; i<len-k; i++) tail = tail->next; // the tail node is the (len-k)-th node (1st node is head)
+        }
+        newH = tail->next; 
+        tail->next = NULL;
+        return newH;
+    }
+};
