@@ -1,6 +1,25 @@
 https://takeuforward.org/data-structure/program-to-generate-pascals-triangle/
 
 
+class Solution {
+public:
+    vector<vector<int>> generate(int numRows) {
+        vector<vector<int>>v;
+       for (int line = 1; line <= numRows; line++)
+      {
+	      int C = 1; 
+          vector<int>v1;
+	       for (int i = 1; i <= line; i++)
+	      {
+            v1.push_back(C);
+            C = C * (line - i) / i;
+	      }
+	      v.push_back(v1);
+      }
+
+        return v;
+    }
+};
 
 class Solution {
 public:
