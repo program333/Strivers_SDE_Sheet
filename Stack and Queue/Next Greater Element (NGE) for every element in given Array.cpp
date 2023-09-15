@@ -10,6 +10,36 @@ Explanation: except 25 every element has an element greater than them present on
 
 */
 
+class Solution
+{
+    public:
+    //Function to find the next greater element for each element of the array.
+    vector<long long> nextLargerElement(vector<long long> arr, int n){
+        // Your code here
+        stack<long long> s;
+        vector<long long> ans;
+        for(int i=n-1; i>=0; i--){
+            while(!s.empty()&&s.top()<=arr[i])
+                s.pop();
+            if(s.empty())
+                ans.push_back(-1);
+            else
+                ans.push_back(s.top());
+            s.push(arr[i]);
+        }
+        reverse(ans.begin(), ans.end());
+        return ans;
+    }
+};
+
+
+
+
+
+
+
+
+
 // A Stack based C++ program to find next
 // greater element for all array elements.
 #include <bits/stdc++.h>
