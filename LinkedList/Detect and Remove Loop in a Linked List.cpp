@@ -1,5 +1,31 @@
 https://www.geeksforgeeks.org/detect-and-remove-loop-in-a-linked-list/
-
+class Solution
+{
+    public:
+    //Function to remove a loop in the linked list.
+    void removeLoop(Node* head)
+    {
+        // code here
+        // just remove the loop without losing any nodes
+        Node * slow = head, *fast = head;
+        while(fast && fast->next)
+        {
+            slow = slow->next;
+            fast = fast->next->next;
+            if(fast == slow) // cycle detected
+            {
+                slow = head;
+                while(slow!=fast)
+                {
+                    fast = fast->next;
+                    slow = slow->next;
+                }
+                while(fast->next != slow) fast = fast->next;
+                fast->next = NULL;
+            }
+        }
+    }
+};
 
 /*
 Hashing: Hash the address of the linked list nodes 
