@@ -1,5 +1,99 @@
 https://www.geeksforgeeks.org/boundary-traversal-of-binary-tree/
 
+
+
+
+
+
+
+
+
+
+
+class Solution {
+public:
+  /*
+   * This function traverses the left boundary of the binary tree and adds all the nodes to the `ans` vector.
+   * The left boundary is defined as the path from the root to the leftmost node.
+   */
+  void traverseLeft(Node *root, vector<int> &ans) {
+    if (root == NULL || !root->left && !root->right) {
+      return;
+    }
+    ans.push_back(root->data);
+    if (root->left) {
+      traverseLeft(root->left, ans);
+    } else {
+      traverseLeft(root->right, ans);
+    }
+  }
+
+  /*
+   * This function traverses all the leaf nodes of the binary tree and adds them to the `ans` vector.
+   */
+  void traverseLeaf(Node *root, vector<int> &ans) {
+    if (root == NULL) {
+      return;
+    }
+    if (!root->left && !root->right) {
+      ans.push_back(root->data);
+      return;
+    }
+    traverseLeaf(root->left, ans);
+    traverseLeaf(root->right, ans);
+  }
+
+  /*
+   * This function traverses the right boundary of the binary tree and adds all the nodes to the `ans` vector.
+   * The right boundary is defined as the path from the root to the rightmost node.
+   */
+  void traverseRight(Node *root, vector<int> &ans) {
+    if (root == NULL || !root->left && !root->right) {
+      return;
+    }
+    if (root->right) {
+      traverseRight(root->right, ans);
+    } else {
+      traverseRight(root->left, ans);
+    }
+    ans.push_back(root->data);
+  }
+
+  /*
+   * This function prints the boundary elements of the binary tree.
+   * The boundary elements are the nodes on the left boundary, all the leaf nodes, and the nodes on the right boundary.
+   */
+  vector <int> boundary(Node *root) {
+    // Your code here
+    vector<int> ans;
+    if (root == NULL) {
+      return ans;
+    }
+    ans.push_back(root->data);
+    traverseLeft(root->left, ans);
+    traverseLeaf(root->left, ans);
+    traverseLeaf(root->right, ans);
+
+/* traverseLeaf(root->left, ans) function calls itself recursively for both the left and right subtrees of the current node*/
+
+
+    traverseRight(root->right, ans);
+    return ans;
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
 #include <bits/stdc++.h>
 using namespace std;
 
